@@ -72,10 +72,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    pref.edit().putString("edt2",edt2.getText().toString()).commit();
-                    copyFile("mixer_paths.xml", "%DEC1_VOL%", edt2.getText().toString(), "/data/data/" + getPackageName() + "/");
-                    execCommand("cp /data/data/" + getPackageName() + "/mixer_paths.xml /system/etc/");
-                    Toast.makeText(MainActivity.this,"command executed OK",Toast.LENGTH_SHORT).show();
+                    String ss = execCommand("mount|grep system");
+                    if(ss.contains("rw")) {
+                        ss = edt2.getText().toString();
+                        pref.edit()
+                                .putString("edt2", ss)
+                                .putString("curr", ss)
+                                .commit();
+                        copyFile("mixer_paths.xml", "%DEC1_VOL%", ss, "/data/data/" + getPackageName() + "/");
+                        execCommand("cp /data/data/" + getPackageName() + "/mixer_paths.xml /system/etc/");
+                        text.setText("Current value: " + ss);
+                    }
+                    else {
+                        text.setText("Mount system RW first!");
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     text.setText(e.getMessage());
@@ -88,10 +98,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    pref.edit().putString("edt3",edt3.getText().toString()).commit();
-                    copyFile("mixer_paths.xml", "%DEC1_VOL%", edt3.getText().toString(), "/data/data/" + getPackageName() + "/");
-                    execCommand("cp /data/data/" + getPackageName() + "/mixer_paths.xml /system/etc/");
-                    Toast.makeText(MainActivity.this,"command executed OK",Toast.LENGTH_SHORT).show();
+                    String ss = execCommand("mount|grep system");
+                    if(ss.contains("rw")) {
+                        ss = edt3.getText().toString();
+                        pref.edit()
+                                .putString("edt3", ss)
+                                .putString("curr", ss)
+                                .commit();
+                        copyFile("mixer_paths.xml", "%DEC1_VOL%", ss, "/data/data/" + getPackageName() + "/");
+                        execCommand("cp /data/data/" + getPackageName() + "/mixer_paths.xml /system/etc/");
+                        text.setText("Current value: "+ss);
+                    }
+                    else {
+                        text.setText("Mount system RW first!");
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     text.setText(e.getMessage());
@@ -105,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         edt3.setText(pref.getString("edt3","90"));
 
         text = (TextView) findViewById(R.id.text);
+        text.setText("Current value: "+pref.getString("curr",""));
     }
 
     /*
