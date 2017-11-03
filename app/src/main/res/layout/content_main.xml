@@ -5,19 +5,21 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="top|center_horizontal"
     tools:context="ru.gmixaz.micmix.MainActivity"
-    tools:showIn="@layout/activity_main">
+    >
 
     <Button
         android:id="@+id/button"
         android:textSize="20sp"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mount system RW"
         />
     <LinearLayout
         android:id="@+id/line3"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -41,6 +43,7 @@
 
     <LinearLayout
         android:id="@+id/line2"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -60,12 +63,14 @@
     </LinearLayout>
     <Button
         android:id="@+id/reboot"
+        android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Reboot"
         />
     <TextView
+        android:layout_marginTop="20dp"
         android:textColor="#FF0000"
         android:textSize="20sp"
         android:id="@+id/text"
